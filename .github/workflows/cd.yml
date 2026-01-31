@@ -1,0 +1,44 @@
+name: CD Pipeline
+
+on:
+  push:
+    branches:
+      - develop
+      - main
+
+jobs:
+  deploy-staging:
+    if: github.ref == 'refs/heads/develop'
+    runs-on: ubuntu-latest
+    environment: staging
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 18
+
+      - run: npm install
+      - run: npm run build
+
+      - name: Deploy to Staging
+        run: echo "🚀 Deploying to STAGING..."
+
+  deploy-production:
+    if: github.ref == 'refs/heads/master'
+    runs-on: ubuntu-latest
+    environment: production
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 18
+
+      - run: npm install
+      - run: npm run build
+
+      - name: Deploy to Production
+        run: echo "🔥 Deploying to PRODUCTION..."
