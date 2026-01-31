@@ -5,7 +5,7 @@ const App = () => {
   return (
     <div>
       <h1 style={{textAlign:'center',textTransform:'uppercase'}}>CI/Cd Pipe Line</h1> 
-      <p>Develop Branch</p>  
+      <p>Develop Branch testing</p>  
       <Counter />   
     </div>
   )
